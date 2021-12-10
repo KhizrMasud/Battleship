@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="grid grid-user">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="grid grid-computer"></div>
+    </div>
+    <div class="grid-display">
+        <div class="ship destroyer-container" draggable="true">
+            <div id="destroyer-0"></div>
+            <div id="destroyer-1"></div>
+        </div>
+        <div class="ship submarine-container" draggable="true">
+            <div class="submarine-0"></div>
+            <div class="submarine-1"></div>
+            <div class="submarine-2"></div>
+            <div class="submarine-3"></div>
+        </div>
+    </div>
+</body>
+
+<style>
+    .container{
+        display: flex;
+    }
+    .grid-user{
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: turquoise;
+    }
+    .grid-computer{
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: yellow;
+    }
+    .grid div {
+        width: 40px;
+        height: 40px;
+        background-color: rebeccapurple;
+    }
+    .grid-display{
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: khaki;
+    }
+    .destroyer-container{
+        width: 80px;
+        height: 40px;
+        background-color: orange;
+        display: flex;
+    }
+    .submarine-container{
+        width: 120px;
+        height: 40px;
+    }
+    .ship div{
+        width: 40px;
+        height: 40px;
+    }
+
+</style>
+</html>

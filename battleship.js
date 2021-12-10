@@ -1,0 +1,6 @@
+const battlestip = {
+    sizeOfShip: () =>
+    {
+        return 
+    }
+}
