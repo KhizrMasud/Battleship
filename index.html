@@ -8,13 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <div class="grid grid-user">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+        <div class="grid grid-user"></div>
         <div class="grid grid-computer"></div>
     </div>
+
+    <div class="hidden-info">
+        <button class="start">start</button>
+        <button class="rotate">Rotate da ship</button>
+        <h3 class="whose-go">your go</h3>
+        <h3 class="info"></h3>
+    </div>
+
     <div class="grid-display">
         <div class="ship destroyer-container" draggable="true">
             <div id="destroyer-0"></div>
@@ -25,8 +29,42 @@
             <div class="submarine-1"></div>
             <div class="submarine-2"></div>
             <div class="submarine-3"></div>
+            
+        <div class="ship cruiser-container" draggable="true">
+            <div class="cruiser-0"></div>
+            <div class="cruiser-1"></div>
+            <div class="cruiser-2"></div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () =>{
+            const userGrid = document.querySelector('.grid-user');
+            const computerGrid = document.querySelector('.computer-user');
+            const displayGrid = document.querySelector('.grid-display');
+            const ships = document.querySelector('.ship');
+            const destroyer = document.querySelector('.destroyer-container');
+            const startButton = document.querySelector('.start');
+            const rotateButton = document.querySelector('.rotate');
+            const turnDisplay = document.querySelector('.whose-go');
+            const infoDisplay = document.querySelector('.info');
+            const userSqaures = [];
+            
+            const width = 10;
+            
+            function createBoard(grid, squares, width) {
+                for ( let i = 0; i < width * width; i ++){
+                        const square = document.createElement('div');
+                        square.dataset.id = i;
+                        grid.appendChild(square);
+                        squares.push(square);
+            }}
+
+        createBoard(userGrid, userSqaures, width);
+
+
+
+        })
+    </script>
 </body>
 
 <style>
@@ -68,6 +106,12 @@
     .submarine-container{
         width: 120px;
         height: 40px;
+        background-color: saddlebrown;
+    }
+    .cruiser-container{
+        width: 160px;
+        height: 40px;
+        background-color: rebeccapurple;
     }
     .ship div{
         width: 40px;
@@ -75,4 +119,4 @@
     }
 
 </style>
-</html>
+
