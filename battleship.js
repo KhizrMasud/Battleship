@@ -1,6 +1,0 @@
-const battlestip = {
-    sizeOfShip: () =>
-    {
-        return 
-    }
-}

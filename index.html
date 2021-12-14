@@ -39,7 +39,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () =>{
             const userGrid = document.querySelector('.grid-user');
-            const computerGrid = document.querySelector('.computer-user');
+            const computerGrid = document.querySelector('.grid-computer');
             const displayGrid = document.querySelector('.grid-display');
             const ships = document.querySelector('.ship');
             const destroyer = document.querySelector('.destroyer-container');
@@ -47,7 +47,9 @@
             const rotateButton = document.querySelector('.rotate');
             const turnDisplay = document.querySelector('.whose-go');
             const infoDisplay = document.querySelector('.info');
-            const userSqaures = [];
+            const userSquares = [];
+            const computerSquares = [];
+            let isHorizontal = true;
             
             const width = 10;
             
@@ -59,10 +61,76 @@
                         squares.push(square);
             }}
 
-        createBoard(userGrid, userSqaures, width);
+        createBoard(userGrid, userSquares, width);
+        createBoard(computerGrid, computerSquares, width);
 
 
+        const shipArray = [
+            {
+                name: 'destroyer',
+                directions : [
+                    [0,1],
+                    [0,width]
+                ]
+            },
+            {
+                name: 'submarine',
+                directions : [
+                    [0,1,2],
+                    [0,width,width*2]
+                ]
+            },
+            {
+                name: 'cruiser',
+                directions : [
+                    [0,1,2],
+                    [0,width,width*2]
+                ]
+            },
+            {
+                name: 'battleship',
+                directions : [
+                    [0,1,2,3],
+                    [0,width,width*2,width*3]
+                ]
+            },
+            {
+                name: 'carrier',
+                directions : [
+                    [0,1,2,3,4],
+                    [0,width,width*2,width*3,width*4]
+                ]
+            },
+        ]
 
+
+            function generate(ship){
+                let randomDirection = Math.floor(Math.random() * ship.directions.length);
+                let current = ship.directions[randomDirection]
+                if (randomDirection === 0) {direction = 1}
+                if (randomDirection === 1) {direction = 10}
+                let randomStart = Math.floor(Math.random() * computerSquares.length - (ship.directions[0].length * direction));
+
+                const isTaken = current.some(index => computerSquares[randomStart + index].classList.contains('taken'))
+                const isAtRightEdge = current.some(index => (randomStart + index) % width === width -1); 
+                const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0);   
+
+                if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach( index => computerSquares[randomStart + index].classList.add('taken', ship.name))
+                else generate(ship);
+            }
+            generate(shipArray[0]);
+            generate(shipArray[1]);
+            generate(shipArray[2]);
+            generate(shipArray[3]);
+            generate(shipArray[4]);
+
+            function rotate(){
+                if (isHorizontal){
+                    destoryer.classList.toggle('destroyer-container-vertical');
+                    isHorizontal = false;
+                }
+            }
+            rotateButton.addEventListener('click', rotate)
         })
     </script>
 </body>
@@ -88,7 +156,6 @@
     .grid div {
         width: 40px;
         height: 40px;
-        background-color: rebeccapurple;
     }
     .grid-display{
         width: 400px;
@@ -103,6 +170,13 @@
         background-color: orange;
         display: flex;
     }
+    .destroyer-container-vertical{
+        width: 40px;
+        height: 80px;
+        background-color: orange;
+        display: flex;
+        flex-wrap: wrap;
+    }
     .submarine-container{
         width: 120px;
         height: 40px;
@@ -116,6 +190,21 @@
     .ship div{
         width: 40px;
         height: 40px;
+    }
+    .destroyer {
+        background-color: black;
+    }
+    .submarine{
+        background-color: blue;
+    }
+    .cruiser{
+        background-color: brown;
+    }
+    .battleship{
+        background-color: khaki;
+    }
+    .carrier{
+        background-color: lawngreen;
     }
 
 </style>
